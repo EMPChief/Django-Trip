@@ -1,0 +1,42 @@
+{% extends 'core/base.html' %} 
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<div class="max-w-lg mx-auto flex flex-wrap items-start p-6">
+    <div class="w-full bg-blue-100 p-6 rounded-xl">
+        <h1 class="mb-6 text-2xl">Register</h1>
+        <form method="POST" action="." class="space-y-3">
+            {% csrf_token %}
+            {% for field in form %}
+                <div>
+                    <label for="{{ field.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">
+                        {{ field.label }}:
+                    </label>
+                    <input type="{{ field.field.widget.input_type }}" name="{{ field.name }}" id="id_{{ field.name }}" 
+                           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                           {% if field.field.required %}required{% endif %}
+                           {% if field.value %}value="{{ field.value|stringformat:'s' }}"{% endif %}>
+                    {% for error in field.errors %}
+                        <div class="text-red-500 text-sm mt-1">{{ error }}</div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+            <div>
+                <button type="submit" 
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4 w-full">
+                    Register
+                </button>
+            </div>
+
+            {% if form.non_field_errors %}
+                <div class="p-6 bg-red-200 text-red-800 rounded-xl mt-4">
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error|escape }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </form>
+    </div>
+</div>
+{% endblock %}
