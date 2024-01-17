@@ -1,24 +1,29 @@
-{% extends 'trip/_base.html' %}
+{% extends 'trips/_base.html' %}
+{% load tailwind_filters %}
 
 {% block content %}
-
 <h3 class="text-xl pb-4">Notes:</h3>
 <div class="flex gap-2 flex-wrap">
     {% for note in object_list %}
     <a href="{% url 'note-detail' note.pk %}">
-        <div class="border-2 rounded-lg pb-4 hover:shadow">
-            <img class="w-48 h-32 object-cover overflow-hidden rounded-t-md" src="{{note.img.url}}" alt="{{note.name}}">
-            <p class="text-center mt-3 text-lg">{{note.trip.city}}</p>
-            <p class="text-center mt-1 text-lg">{{note.name}}</p>
-            <p class="text-center mt-1 text-gray-600">Rating: {{note.rating}}/5</p>
+        <div class="border-2 rounded-lg pb-4 hover:shadow-md hover:bg-gray-100 transition duration-300 ease-in-out transform hover:scale-105">
+            {% if note.img %}
+                <img class="w-48 h-32 object-cover overflow-hidden rounded-t-md" src="{{ note.img.url }}" alt="{{ note.name }}">
+            {% else %}
+                <div class="w-48 h-32 bg-gray-200 flex justify-center items-center rounded-t-md">No image</div>
+            {% endif %}
+            <p class="text-center mt-3 text-lg">{{ note.trip.city }}</p>
+            <p class="text-center mt-1 text-lg">{{ note.name }}</p>
+            <p class="text-center mt-1 text-gray-600">Rating: {{ note.rating }}/5</p>
         </div>
     </a>
+    {% empty %}
+        <p>No notes available.</p>
     {% endfor %}
     <a href="{% url 'note-create' %}">
-        <div class="border-2 border-dashed rounded-lg hover:shadow w-48 h-full flex justify-center items-center">
+        <div class="border-2 border-dashed rounded-lg hover:shadow-md hover:bg-gray-100 w-48 h-full flex justify-center items-center transition duration-300 ease-in-out transform hover:scale-105">
             <p class="">New Note +</p>
         </div>
     </a>
 </div>
-
 {% endblock content %}

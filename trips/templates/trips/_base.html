@@ -1,41 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="https://cdn.tailwindcss.com"></script>
-      </head>
-<body>
-    <div class="flex-col md:flex-row flex h-screen">
-        <div class="md:h-screen bg-gray-700 text-white w-full md:w-1/4 md:max-w-xs py-2 md:pt-8 md:pb-2 flex flex-col items-center justify-start border-r">
-            <div class="border-b w-full text-center pb-4 text-2xl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://favi.bjornmagne.com/bmklogo3/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="https://favi.bjornmagne.com/emp2l/bmklogo3-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/x-icon" href="https://favi.bjornmagne.com/emp2l/bmklogo3.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>📌 EMPTrip</title>
+
+    <style>
+        .main-teal {
+            background-color: #008080;
+            transition: background-color 0.3s ease-in-out;
+        }
+        .hover-teal:hover {
+            background-color: #006666;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="flex flex-col md:flex-row h-screen">
+        <div class="md:h-screen main-teal text-white w-full md:w-1/4 md:max-w-xs py-2 md:pt-8 md:pb-2 flex flex-col items-center justify-start border-r border-gray-300">
+            <div class="border-b border-gray-300 w-full text-center pb-4 text-2xl">
                 <h1>📌 Trip Trak</h1>
             </div>
             <div class="pt-4 w-full text-center">
                 <ul class="flex md:flex-col justify-around px-2 md:px-0 pb-2 md:pb-0">
-                    <a href="{% url 'trip-list' %}">
-                        <li class="py-2 px-3 md:px-0 hover:bg-gray-600 hover:cursor-pointer">My Trips</li>
+                    <a href="{% url 'trips-list' %}" class="w-full">
+                        <li class="py-2 px-3 md:px-0 hover-teal hover:cursor-pointer transition duration-300 ease-in-out">My Trips</li>
                     </a>
-                    <a href="{% url 'trip-create' %}">
-                        <li class="py-2 px-3 md:px-0 hover:bg-gray-600 hover:cursor-pointer">New Trip +</li>
+                    <a href="{% url 'trip-create' %}" class="w-full">
+                        <li class="py-2 px-3 md:px-0 hover-teal hover:cursor-pointer transition duration-300 ease-in-out">New Trip +</li>
                     </a>
-                    <a href="{% url 'note-list' %}">
-                        <li class="py-2 px-3 md:px-0 hover:bg-gray-600 hover:cursor-pointer">My Notes</li>
+                    <a href="{% url 'note-list' %}" class="w-full">
+                        <li class="py-2 px-3 md:px-0 hover-teal hover:cursor-pointer transition duration-300 ease-in-out">My Notes</li>
                     </a>
-                    <a href="{% url 'note-create' %}">
-                    <li class="py-2 px-3 md:px-0 hover:bg-gray-600 hover:cursor-pointer">New Note +</li>
+                    <a href="{% url 'note-create' %}" class="w-full">
+                        <li class="py-2 px-3 md:px-0 hover-teal hover:cursor-pointer transition duration-300 ease-in-out">New Note +</li>
                     </a>
                 </ul>
             </div>
             <div class="mt-auto w-full text-center flex md:flex-col justify-evenly py-2 md:pt-0">
-                <p class="">{{user.username}}</p>
-                <hr class="my-2">
-                <a class="underline" href="{% url 'logout' %}">
+                <p>{{user.username}}</p>
+                <hr class="my-2 border-gray-300">
+                <a class="underline text-white hover:text-gray-200 transition duration-300 ease-in-out" href="{% url 'logout' %}">
                     Logout
                 </a>
             </div>
         </div>
-        <div class="w-full md:w-full p-10 overflow-auto">
+        <div class="w-full md:w-3/4 p-10 overflow-auto">
             {% block content %}
             {% endblock content %}
         </div>

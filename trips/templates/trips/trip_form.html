@@ -1,4 +1,4 @@
-{% extends 'trip/_base.html' %}
+{% extends 'trips/_base.html' %}
 {% load tailwind_filters %}
 
 {% block content %}
@@ -6,6 +6,6 @@
 <form action="" method="POST">
     {% csrf_token %}
     {{form|crispy}}
-    <input class="bg-green-400 px-7 py-2 rounded hover:cursor-pointer hover:bg-green-300" type="submit" value="Save">
+    <input class="bg-green-400 px-7 py-2 rounded transition duration-300 ease-in-out hover:cursor-pointer hover:bg-green-300 transform hover:scale-105" type="submit" value="Save">
 </form>
 {% endblock content %}
