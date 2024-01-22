@@ -20,8 +20,18 @@
     </style>
 </head>
 <body class="bg-gray-100">
+    <!-- Hamburger Menu Button with Visible Styling for Testing -->
+    <div class="md:hidden fixed top-0 right-0 p-4 z-50 bg-red-500">
+        <button id="menuButton" class="text-white focus:outline-none">
+            <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+        </button>
+    </div>
+
+
+
     <div class="flex flex-col md:flex-row h-screen">
-        <div class="md:h-screen main-teal text-white w-full md:w-1/4 md:max-w-xs py-2 md:pt-8 md:pb-2 flex flex-col items-center justify-start border-r border-gray-300">
+        <!-- Sidebar Navigation -->
+        <div id="menu" class="md:h-screen main-teal text-white w-full md:w-1/4 md:max-w-xs py-2 md:pt-8 md:pb-2 flex flex-col items-center justify-start border-r border-gray-300 hidden md:flex">
             <div class="border-b border-gray-300 w-full text-center pb-4 text-2xl">
                 <h1>📌 Trip Trak</h1>
             </div>
@@ -49,10 +59,18 @@
                 </a>
             </div>
         </div>
+
+        <!-- Main Content -->
         <div class="w-full md:w-3/4 p-10 overflow-auto">
             {% block content %}
             {% endblock content %}
         </div>
     </div>
+
+    <script>
+        document.getElementById('menuButton').addEventListener('click', function() {
+            document.getElementById('menu').classList.toggle('hidden');
+        });
+    </script>
 </body>
 </html>
